@@ -115,11 +115,12 @@ object StockTradeBoot extends App {
             return false
           }
           val qtyAbleToBuy = Math.min(buyingOrder.qty, sellingOrder.qty)
+          val buyingPrice = Math.min(buyingOrder.price, sellingOrder.price)
           closeOrder(
             sellerDetail = sellOrders(stockName).get(sellingOrderKey).get,
             buyerDetail = buyOrders(stockName).get(orderKey).get,
             qty = qtyAbleToBuy,
-            price = buyingOrder.price,
+            price = buyingPrice,
             stockName = stockName
           )
           if (buyOrders(stockName).get(orderKey).get.qty == 0) {
